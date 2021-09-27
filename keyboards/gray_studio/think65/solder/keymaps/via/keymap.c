@@ -15,6 +15,61 @@
  */
 #include QMK_KEYBOARD_H
 
+/*
+* LED ranges for Think6.5v2 2U
+* These values were derived from manual testing. Derived from keymaps/rys.
+* ┌───────┬───────┬─────────────┬───────────────────────────────────────────┐
+* │ 00 01 │ 02 03 │ 04 05 06 07 │ 08 09 10 11 12 13 14 15 16 17 18 19 20 21 │
+* │ badge │ badge │    (?)      │              underglow (?)                │
+* │  bar  │ icon  │             │                                           │
+* └───────┴───────┴─────────────┴───────────────────────────────────────────┘
+*/
+
+// Define the LED ranges    start, count
+#define T65_CAPS                0, 2
+#define T65_BADGE               2, 2
+#define T65_UNDERGLOW           4, 18
+#define T65_ALL                 0, 22
+
+const rgblight_segment_t PROGMEM mk5_rgb_caps[] = RGBLIGHT_LAYER_SEGMENTS(
+    {T65_CAPS, HSV_WHITE}
+);
+
+const rgblight_segment_t PROGMEM mk5_rgb_layer1[] = RGBLIGHT_LAYER_SEGMENTS(
+    {T65_BADGE, HSV_CYAN}
+);
+
+const rgblight_segment_t PROGMEM mk5_rgb_layer2[] = RGBLIGHT_LAYER_SEGMENTS(
+    {T65_BADGE, HSV_CORAL}
+);
+
+const rgblight_segment_t PROGMEM mk5_rgb_layer3[] = RGBLIGHT_LAYER_SEGMENTS(
+    {T65_BADGE, HSV_PURPLE}
+);
+
+const rgblight_segment_t* const PROGMEM mk5_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    mk5_rgb_caps,
+    mk5_rgb_layer1,
+    mk5_rgb_layer2,
+    mk5_rgb_layer3
+);
+
+void keyboard_post_init_user(void) {
+    rgblight_layers = mk5_rgb_layers;
+}
+
+bool led_update_user(led_t led_state) {
+    rgblight_set_layer_state(0, led_state.caps_lock);
+    return true;
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    for (int i = 1; i <= 3; i++) {
+        rgblight_set_layer_state(i, layer_state_cmp(state, i));
+    }
+    return state;
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_all(
         KC_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC, KC_BSPC, KC_DEL,
