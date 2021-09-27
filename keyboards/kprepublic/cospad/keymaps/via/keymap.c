@@ -27,11 +27,11 @@ const rgblight_segment_t PROGMEM mk5_rgb_layer1[] = RGBLIGHT_LAYER_SEGMENTS(
 );
 
 const rgblight_segment_t PROGMEM mk5_rgb_layer2[] = RGBLIGHT_LAYER_SEGMENTS(
-    {COSPAD_UNDERGLOW, HSV_CORAL}
+    {COSPAD_UNDERGLOW, HSV_PURPLE}
 );
 
 const rgblight_segment_t PROGMEM mk5_rgb_layer3[] = RGBLIGHT_LAYER_SEGMENTS(
-    {COSPAD_UNDERGLOW, HSV_PURPLE}
+    {COSPAD_UNDERGLOW, HSV_RED}
 );
 
 const rgblight_segment_t* const PROGMEM mk5_rgb_layers[] = RGBLIGHT_LAYERS_LIST(

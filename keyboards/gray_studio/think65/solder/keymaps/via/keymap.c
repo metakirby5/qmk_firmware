@@ -40,11 +40,11 @@ const rgblight_segment_t PROGMEM mk5_rgb_layer1[] = RGBLIGHT_LAYER_SEGMENTS(
 );
 
 const rgblight_segment_t PROGMEM mk5_rgb_layer2[] = RGBLIGHT_LAYER_SEGMENTS(
-    {T65_BADGE, HSV_CORAL}
+    {T65_BADGE, HSV_PURPLE}
 );
 
 const rgblight_segment_t PROGMEM mk5_rgb_layer3[] = RGBLIGHT_LAYER_SEGMENTS(
-    {T65_BADGE, HSV_PURPLE}
+    {T65_BADGE, HSV_RED}
 );
 
 const rgblight_segment_t* const PROGMEM mk5_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
