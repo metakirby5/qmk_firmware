@@ -16,6 +16,42 @@
  
  #include QMK_KEYBOARD_H
 
+#define COSPAD_UNDERGLOW 0, 4
+
+const rgblight_segment_t PROGMEM mk5_rgb_blank[] = RGBLIGHT_LAYER_SEGMENTS(
+    {COSPAD_UNDERGLOW, HSV_WHITE}
+);
+
+const rgblight_segment_t PROGMEM mk5_rgb_layer1[] = RGBLIGHT_LAYER_SEGMENTS(
+    {COSPAD_UNDERGLOW, HSV_CYAN}
+);
+
+const rgblight_segment_t PROGMEM mk5_rgb_layer2[] = RGBLIGHT_LAYER_SEGMENTS(
+    {COSPAD_UNDERGLOW, HSV_CORAL}
+);
+
+const rgblight_segment_t PROGMEM mk5_rgb_layer3[] = RGBLIGHT_LAYER_SEGMENTS(
+    {COSPAD_UNDERGLOW, HSV_PURPLE}
+);
+
+const rgblight_segment_t* const PROGMEM mk5_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    mk5_rgb_blank,
+    mk5_rgb_layer1,
+    mk5_rgb_layer2,
+    mk5_rgb_layer3
+);
+
+void keyboard_post_init_user(void) {
+    rgblight_layers = mk5_rgb_layers;
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    for (int i = 1; i <= 3; i++) {
+        rgblight_set_layer_state(i, layer_state_cmp(state, i));
+    }
+    return state;
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Keymap _BL: (Base Layer) Default Layer
      * ,-------------------.
